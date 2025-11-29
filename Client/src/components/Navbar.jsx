@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from 'react-router-dom'
 import { IoSearchSharp, IoMenu, IoClose } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa6";
 import { FaCartArrowDown } from "react-icons/fa";
@@ -7,54 +8,53 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-md fixed w-full z-50">
+<nav className="bg-white shadow-md sticky top-0 w-full md:w-full w-[70%] z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold font-serif text-gray-900">
+            <h1 className="text-2xl text-gray-900">
               FOREVER.
             </h1>
           </div>
 
           {/* Desktop Menu Links */}
-          <div className="hidden md:flex space-x-8 font-serif">
-            <a href="#" className="text-gray-700 hover:text-gray-900 font-bold">
+          <div className="hidden md:flex space-x-8">
+            <Link to='/' className="text-gray-700 hover:text-gray-900 font-bold">
               HOME
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to='/collecion'
               className="text-gray-700 hover:text-gray-900 font-bold"
             >
               COLLECTION
-            </a>
-            <a href="#" className="text-gray-700 hover:text-gray-900 font-bold">
+            </Link>
+            <Link to='/about' className="text-gray-700 hover:text-gray-900 font-bold">
               ABOUT
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to='/contac'
               className="text-gray-700 hover:text-gray-900 font-bold"
             >
               CONTACT
-            </a>
+            </Link>
           </div>
 
           {/* Icons + Mobile Menu Button */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-5 relative top-1  ">
             {/* Search */}
             <button>
-              <IoSearchSharp size={22} />
+              <IoSearchSharp size={22} className="hover:cursor-pointer"/>
             </button>
 
             {/* User */}
             <button>
-              <FaRegUser size={22} />
+              <FaRegUser size={22} className="hover:cursor-pointer" />
             </button>
 
             {/* Cart */}
             <div className="relative">
               <button>
-                <FaCartArrowDown size={22} />
+                <FaCartArrowDown size={22} className="hover:cursor-pointer" />
               </button>
               <span className="absolute -top-2 -right-2 bg-black text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
                 10
@@ -62,9 +62,9 @@ const Navbar = () => {
             </div>
 
             {/* Mobile menu button */}
-            <div className="md:hidden">
+            <div className="md:hidden ">
               <button onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? <IoClose size={25} /> : <IoMenu size={25} />}
+                {isOpen ? <IoClose size={25} className="cursor-pointer" /> : <IoMenu size={25} className="cursor-pointer"  />}
               </button>
             </div>
           </div>
@@ -74,18 +74,18 @@ const Navbar = () => {
       {/* Mobile Menu Links */}
       {isOpen && (
         <div className="md:hidden bg-white px-4 pt-2 pb-4 space-y-2 shadow-md">
-          <a href="#" className="block text-gray-700 hover:text-gray-900 font-bold">
+          <Link to='/' className="block text-gray-700 hover:text-gray-900 font-bold">
             HOME
-          </a>
-          <a href="#" className="block text-gray-700 hover:text-gray-900 font-bold">
+          </Link>
+          <Link to='/collection' className="block text-gray-700 hover:text-gray-900 font-bold">
             COLLECTION
-          </a>
-          <a href="#" className="block text-gray-700 hover:text-gray-900 font-bold">
+          </Link>
+          <Link to='/about' className="block text-gray-700 hover:text-gray-900 font-bold">
             ABOUT
-          </a>
-          <a href="#" className="block text-gray-700 hover:text-gray-900 font-bold">
+          </Link>
+          <Link to='/contact' className="block text-gray-700 hover:text-gray-900 font-bold">
             CONTACT
-          </a>
+          </Link>
         </div>
       )}
     </nav>
