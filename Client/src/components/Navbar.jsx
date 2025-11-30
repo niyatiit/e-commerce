@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IoSearchSharp, IoMenu, IoClose } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa6";
 import { FaCartArrowDown } from "react-icons/fa";
@@ -12,35 +12,64 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex-shrink-0">
-            <h1 className="text-2xl text-gray-900">FOREVER.</h1>
+            <Link to="/">
+              <h1 className="text-2xl text-gray-900">FOREVER.</h1>
+            </Link>
           </div>
 
           {/* Desktop Menu Links */}
           <div className="hidden md:flex space-x-8">
-            <Link
+            <NavLink
               to="/"
-              className="text-gray-700 hover:text-gray-900 font-bold"
+              className={({ isActive }) =>
+                `font-bold ${
+                  isActive
+                    ? "text-black underline underline-offset-4"
+                    : "text-gray-700"
+                }`
+              }
             >
               HOME
-            </Link>
-            <Link
-              to="/collecion"
-              className="text-gray-700 hover:text-gray-900 font-bold"
+            </NavLink>
+
+            <NavLink
+              to="/collection"
+              className={({ isActive }) =>
+                `font-bold ${
+                  isActive
+                    ? "text-black underline underline-offset-4"
+                    : "text-gray-700"
+                }`
+              }
             >
               COLLECTION
-            </Link>
-            <Link
+            </NavLink>
+
+            <NavLink
               to="/about"
-              className="text-gray-700 hover:text-gray-900 font-bold"
+              className={({ isActive }) =>
+                `font-bold ${
+                  isActive
+                    ? "text-black underline underline-offset-4"
+                    : "text-gray-700"
+                }`
+              }
             >
               ABOUT
-            </Link>
-            <Link
-              to="/contac"
-              className="text-gray-700 hover:text-gray-900 font-bold"
+            </NavLink>
+
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `font-bold ${
+                  isActive
+                    ? "text-black underline underline-offset-4"
+                    : "text-gray-700"
+                }`
+              }
             >
               CONTACT
-            </Link>
+            </NavLink>
           </div>
 
           {/* Icons + Mobile Menu Button */}

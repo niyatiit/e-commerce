@@ -40,8 +40,8 @@ const LatestCollection = () => {
           />
         ))}
       </div>
-
     </div>
+
   );
 };
 
