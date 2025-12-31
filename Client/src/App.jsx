@@ -12,12 +12,16 @@ import Orders from "./pages/Orders";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Search from "./components/Search";
+import { ToastContainer, toast } from 'react-toastify';
 
 const App = () => {
   return (
     <>
       <div>
+        <ToastContainer/>
         <Navbar/>
+        <Search/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/collection" element={<Collection />} />

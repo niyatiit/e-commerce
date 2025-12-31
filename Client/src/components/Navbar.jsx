@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { IoSearchSharp, IoMenu, IoClose } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa6";
 import { FaCartArrowDown } from "react-icons/fa";
+import { ShopContext } from "../context/ShopContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { setShowSearch, getCartCount } = useContext(ShopContext);
 
   return (
     <nav className="bg-white shadow-md sticky top-0 w-full md:w-full w-[70%] z-50">
@@ -75,22 +77,46 @@ const Navbar = () => {
           {/* Icons + Mobile Menu Button */}
           <div className="flex items-center space-x-5 relative top-1  ">
             {/* Search */}
-            <button>
+            <button onClick={() => setShowSearch(true)}>
               <IoSearchSharp size={22} className="hover:cursor-pointer" />
             </button>
 
             {/* User */}
-            <button>
-              <FaRegUser size={22} className="hover:cursor-pointer" />
-            </button>
+
+            {/* User with dropdown */}
+            <div className="relative group">
+              <button>
+                <FaRegUser size={22} className="hover:cursor-pointer" />
+              </button>
+              <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg hidden group-hover:block z-50">
+                <Link
+                  to="/login"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  My Profile
+                </Link>
+                <Link
+                  to="/orders"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Orders
+                </Link>
+                <Link
+                  to="/logout"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Logout
+                </Link>
+              </div>
+            </div>
 
             {/* Cart */}
             <div className="relative">
-              <button>
+              <Link to="/Cart">
                 <FaCartArrowDown size={22} className="hover:cursor-pointer" />
-              </button>
+              </Link>
               <span className="absolute -top-2 -right-2 bg-black text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
-                10
+                {getCartCount()}
               </span>
             </div>
 
