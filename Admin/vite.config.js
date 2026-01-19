@@ -8,7 +8,7 @@ export default defineConfig({
       babel: {
         plugins: [['babel-plugin-react-compiler']],
       },
-      server : {port : 5173}
+      server : {port : 5174}
     }),
   ],
 })

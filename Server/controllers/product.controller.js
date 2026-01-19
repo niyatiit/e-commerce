@@ -89,6 +89,9 @@ const addProduct = async (req, res) => {
   }
 };
 
+
+
+
 // Function for the list of the product
 const listProduct = async (req, res) => {
   try {
