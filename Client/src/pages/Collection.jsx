@@ -165,7 +165,7 @@ const Collection = () => {
               key={index}
               name={item.name}
               id={item._id}
-              image={item.image}
+              image={item.image[0]}
               price={item.price}
             />
           ))}

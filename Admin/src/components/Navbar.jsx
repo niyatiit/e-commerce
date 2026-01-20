@@ -2,7 +2,7 @@ import React from "react";
 
 const Navbar = ({ setToken }) => {
   return (
-    <nav className="w-full h-16 bg-white shadow-sm flex items-center justify-between px-6 fixed">
+    <nav className="w-full h-16 bg-white snavhadow-sm flex items-center justify-between px-6 fixed">
       {/* Left Side - Logo & Admin Text */}
       <div className="gap-2">
         <h1 className="text-xl font-bold tracking-wide">

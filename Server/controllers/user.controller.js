@@ -13,6 +13,13 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+     if (!email || !password) {
+      return res.json({
+        success: false,
+        message: "Please Filled all property",
+      });
+    }
+
     const user = await userModel.findOne({ email });
 
     if (!user) {
@@ -34,12 +41,7 @@ const loginUser = async (req, res) => {
       });
     }
 
-    if (!email || !password) {
-      return res.json({
-        success: false,
-        message: "Please Filled all property",
-      });
-    }
+   
 
     return res.json({
       success: true,
@@ -53,6 +55,7 @@ const loginUser = async (req, res) => {
     });
   }
 };
+
 
 const registerUser = async (req, res) => {
   try {

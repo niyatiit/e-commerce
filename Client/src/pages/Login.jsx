@@ -1,16 +1,67 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { ShopContext } from "../context/ShopContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [currentState, setCurrentState] = useState("Sign Up");
+  const { token, setToken, navigate, backendURL } = useContext(ShopContext);
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
-  const onSubmitHander = async (e) =>{
-    e.preventDefault()
-  }
+  const onSubmitHander = async (e) => {
+    e.preventDefault();
+    try {
+      if (currentState === "Sign Up") {
+        const response = await axios.post(backendURL + "/api/user/register", {
+          name,
+          email,
+          password,
+        });
+        console.log(response.data);
+        if (response.data.success) {
+          setToken(response.data.token);
+          localStorage.setItem(token, response.data.token);
+          toast.success("Registation is successfully")
+        } else {
+          toast.error(response.data.message);
+        }
+      } else {
+        const response = await axios.post(backendURL + "/api/user/login", {
+          email,
+          password,
+        });
+        console.log(response.data);
+        if (response.data.success) {
+          setToken(response.data.token);
+          localStorage.setItem("token", response.data.token);
+          toast.success("Login Successfully")
+        } else {
+          toast.error(response.data.message);
+        }
+      }
+    } catch (error) {
+      console.log("Error:---- ", error);
+      toast.error(error.message);
+    }
+    setName("")
+    setPassword("")
+    setEmail("")
+  };
+
+  useEffect(()=>{
+    if(token){
+      navigate("/")
+    }
+  },[token])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300">
-      <form onSubmit={onSubmitHander} className="w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl">
-        
+      <form
+        onSubmit={onSubmitHander}
+        className="w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl"
+      >
         {/* Heading */}
         <div className="text-center mb-8">
           <p className="text-2xl font-bold text-gray-800 tracking-wide">
@@ -23,7 +74,9 @@ const Login = () => {
         <div className="space-y-6">
           {currentState === "Sign Up" && (
             <input
-            required
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              required
               type="text"
               placeholder="Name"
               className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black transition"
@@ -31,14 +84,18 @@ const Login = () => {
           )}
 
           <input
-          required
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            required
             type="email"
             placeholder="Email"
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black transition"
           />
 
           <input
-          required
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            required
             type="password"
             placeholder="Password"
             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black transition"

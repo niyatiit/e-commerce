@@ -5,6 +5,7 @@ import connectDB from './config/db.js'
 import connectCloudinary from './config/cloudinary.js'
 import userRouter from './routes/user.route.js'
 import productRoute from './routes/product.route.js'
+import cartRouter from './routes/cart.route.js'
 
 
 // App Config 
@@ -21,6 +22,7 @@ app.use(cors())
 // Api Endpoints
 app.use('/api/user' , userRouter)
 app.use('/api/product',productRoute)
+app.use('/api/cart',cartRouter)
 
 
 app.get("/" ,(req,res)=>{
